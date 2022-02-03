@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+  labels:
+    app: clientui
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: clientui
+  template:
+    metadata:
+      labels:
+        app: clientui
+    spec:
+      containers:
+      - name: clientui
+        image: registry.gitlab.com/sali21/ms-clientui
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-service
+spec:
+  selector:
+    app: clientui
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+
