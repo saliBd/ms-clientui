@@ -5,12 +5,16 @@ include:
   - template: Security/Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Container-Scanning.gitlab-ci.yml
+  - template: DAST.gitlab-ci.yml
+Variables: 
+  DAST_WEBSITE:http://34.66.33.218
 
 stages:
   - build
   - package 
   - test
   - deploy
+  - dast
 
 container_scanning:
   stage: test
